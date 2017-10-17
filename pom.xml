@@ -54,7 +54,7 @@
 
 	</dependencies>
 	<build>
-		<finalName>servletjspdemo</finalName>
+		<finalName>smallshop</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -89,5 +89,5 @@
 		</plugins>
 	</build>
 
-	<artifactId>servletjspdemo</artifactId>
+	<artifactId>smallshop</artifactId>
 </project>
