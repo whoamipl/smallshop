@@ -7,19 +7,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<jsp:useBean id="storage" class="com.example.servletjspdemo.service.StorageService" scope="application" />
 <jsp:useBean id="computer" class="com.example.servletjspdemo.domain.Computer" scope="session" />
 
-<form action="addComputer.jsp">
+<jsp:setProperty name="computer" property="*" />
 
-  Model : <input type="text" name="model" value="${computer.model}" required /><br />
-  CPU   : <input type="text" name="cpu" value="${}" required /><br />
-  GPU   : <input type="text" name="gpu" value="${person.firstName}" required/><br />
-  RAM   : <input type="text" name="ram" value="${person.firstName}" required/><br />
-  HDD   : <input type="text" name="hdd" value="${person.firstName}" required/><br />
-  <input type="submit" value=" OK ">
-</form>
+<jsp:useBean id="storage" class="com.example.servletjspdemo.service.StorageService" scope="application" />
 
+<%
+  storage.addComputer(request.getParameter("model"), Integer.parseInt(request.getParameter("ram")),request
+  .getParameter("cpu"),
+                Integer.parseInt(request.getParameter("hdd")), request.getParameter("gpu"));
+%>
+
+<p>Following computers has been added to storage: </p>
+<p>
+  <a href="showAllComputer.jsp">Show all persons</a>
+</p>
 </body>
 </html>

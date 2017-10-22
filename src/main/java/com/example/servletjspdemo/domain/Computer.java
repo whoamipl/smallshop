@@ -8,6 +8,9 @@ public class Computer {
     private int hdd;
     private String gpu;
 
+    public Computer () {
+
+    }
     public Computer(String model, int ram, String cpu, int hdd, String gpu) {
         this.model = model;
         this.ram = ram;
