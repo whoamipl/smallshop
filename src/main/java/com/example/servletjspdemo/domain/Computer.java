@@ -55,4 +55,28 @@ public class Computer {
     public void setGpu(String gpu) {
         this.gpu = gpu;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Computer computer = (Computer) o;
+
+        if (ram != computer.ram) return false;
+        if (hdd != computer.hdd) return false;
+        if (model != null ? !model.equals(computer.model) : computer.model != null) return false;
+        if (cpu != null ? !cpu.equals(computer.cpu) : computer.cpu != null) return false;
+        return gpu != null ? gpu.equals(computer.gpu) : computer.gpu == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = model != null ? model.hashCode() : 0;
+        result = 31 * result + ram;
+        result = 31 * result + (cpu != null ? cpu.hashCode() : 0);
+        result = 31 * result + hdd;
+        result = 31 * result + (gpu != null ? gpu.hashCode() : 0);
+        return result;
+    }
 }
