@@ -1,17 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 
+
+<title>Insert title here</title>
 <jsp:useBean id="storage" class="com.example.servletjspdemo.service.StorageService" scope="application" />
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
 body {
 	background-color: #1c4150;
@@ -20,7 +16,7 @@ body {
 #topdiv{
 	margin-left: auto;
 	margin-right: auto;
-	float: none;
+	position: absolute;
 }
 .tabs {
 	margin: 5px;
@@ -40,21 +36,30 @@ a {
 a:visited {
 	color: #e8ecee;
 }
-
+form {
+    position: relative;
+    top:65px;
+}
+input {
+  background-color:#32546c;
+  border: 2px solid #8da0ad;
+  margin: 2px;
+  display: block;
+}
 </style>
 </head>
 <body>
 	<div id="topdiv">
-	<div class="tabs"><a href='/shoppingcard'>Shopping Card</div>
-	<div class="tabs"><a href='/addComputer.jsp'>Add Computer</div>
-	<div class="tabs"><a href='/shop'>Shop</a></div>
-	<div/></br>
+	<div class="tabs"><a href='/smallshop/shoppingcard'>Shopping Card</div>
+	<div class="tabs"><a href='/smallshop/getComputerData.jsp'>Add Computer</div>
+	<div class="tabs"><a href='/smallshop/shop'>Shop</a></div>
+	<div/>
 	<form action="addComputer.jsp">
-      Model : <input type="text" name="model" required /><br />
-      CPU   : <input type="text" name="cpu" required /><br />
-      GPU   : <input type="text" name="gpu" required/><br />
-      RAM   : <input type="text" name="ram" required/><br />
-      HDD   : <input type="text" name="hdd" required/><br />
+      MODEL : <input type="text" name="model" required/>
+      CPU   : <input type="text" name="cpu" required />
+      GPU   : <input type="text" name="gpu" required/>
+      RAM   : <input type="text" name="ram" required/>
+      HDD   : <input type="text" name="hdd" required/>
       <input type="submit" value=" OK ">
     </form>
 </body>
