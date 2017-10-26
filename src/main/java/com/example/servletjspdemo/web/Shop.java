@@ -8,12 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet("/shop")
 public class Shop extends HttpServlet {
+    @Override
+    public void init() throws ServletException {
+
+    }
 
     @Override
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws
@@ -21,54 +27,16 @@ public class Shop extends HttpServlet {
 
         StorageService storage = new StorageService();
         Map<Integer, Computer> computers = storage.getShopDb();
+        computers.put(1, new Computer("KabbyX",8,"Ryzen 5", 1, "RX470", 2999));
         PrintWriter out = httpServletResponse.getWriter();
-        out.println("<html>\n" +
-                "<head>\n" +
-                "<meta charset=\"UTF-8\">\n" +
-                "<style type=\"text/css\">\n" +
-                "body {\n" +
-                "\tbackground-color: #1c4150;\n" +
-                "\tcolor: #e8ecee;\n" +
-                "}\n" +
-                "#topdiv{\n" +
-                "\tmargin-left: auto;\n" +
-                "\tmargin-right: auto;\n" +
-                "}\n" +
-                ".tabs {\n" +
-                "\tmargin: 5px;\n" +
-                "\tdisplay: inline-block;\n" +
-                "\theight: 50px;\n" +
-                "\twidth: 100px;\n" +
-                "\tbackground-color: #32546c;\n" +
-                "\tborder: 2px solid #8da0ad;\n" +
-                "\tfloat: left;\n" +
-                "\ttext-align: center;\n" +
-                "\t}\n" +
-                "a {\n" +
-                "\n" +
-                "\ttext-decoration: none;\n" +
-                "\tcolor: #e8ecee;\n" +
-                "}\n" +
-                "a:visited {\n" +
-                "\tcolor: #e8ecee;\n" +
-                "}\n" +
-                "\n" +
-                "</style>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "\t<div id=\"topdiv\">\n" +
-                "\t<div class=\"tabs\"><a href='http://localhost:8080/smallshop/shoppingcard'>Shopping Card</div>\n" +
-                "\t<div class=\"tabs\"><a href='http://localhost:8080/smallshop/getComputerData.jsp'>Add " +
-                "Computer</div>\n" +
-                "\t<div class=\"tabs\"><a href='http://localhost:8080/smallshop/shop'>Shop</a></div>\n" +
-                "\t<div/>\n" +
-                "<form id=\"Computers\">");
-                 int i = 1;
-                 for(Computer c : computers.values()) {
-                     out.println("<label>" + c.getModel() + " " + c.getCpu() + " " + c.getGpu() + "<input " +
-                             "type=\"checkbox\" value=\"" +i+ "\"/></label>");
-                 }
-                 out.println("</body>" +
-                         "</html>");
+        HttpSession session = httpServletRequest.getSession();
+
+
+        ShoppingCart shoppingCart;
+        shoppingCart = (ShoppingCart) session.getAttribute("cart");
+        HashMap<String, Double> items = shoppingCart.getCartItems();
+        for(String key: items.keySet()){
+            out.println("<tr><td>"+key+" - </td><td>"+"$"+items.get(key)+"</td></tr>");
+        }
     }
 }

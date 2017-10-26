@@ -16,7 +16,8 @@
 <%
   storage.addComputer(request.getParameter("model"), Integer.parseInt(request.getParameter("ram")),request
   .getParameter("cpu"),
-                Integer.parseInt(request.getParameter("hdd")), request.getParameter("gpu"));
+                Integer.parseInt(request.getParameter("hdd")), request.getParameter("gpu"), Double.parseDouble
+                (request.getParameter("price")));
 %>
 
 <p>Following computers has been added to storage: </p>

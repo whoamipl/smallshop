@@ -60,6 +60,7 @@ input {
       GPU   : <input type="text" name="gpu" required/>
       RAM   : <input type="text" name="ram" required/>
       HDD   : <input type="text" name="hdd" required/>
+      PRICE : <input type="text" name="price" required/>
       <input type="submit" value=" OK ">
     </form>
 </body>

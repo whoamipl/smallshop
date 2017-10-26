@@ -7,16 +7,19 @@ public class Computer {
     private String cpu;
     private int hdd;
     private String gpu;
+    private double price;
 
     public Computer () {
 
     }
-    public Computer(String model, int ram, String cpu, int hdd, String gpu) {
+
+    public Computer(String model, int ram, String cpu, int hdd, String gpu, double price) {
         this.model = model;
         this.ram = ram;
         this.cpu = cpu;
         this.hdd = hdd;
         this.gpu = gpu;
+        this.price = price;
     }
 
     public String getModel() {
@@ -57,6 +60,14 @@ public class Computer {
 
     public void setGpu(String gpu) {
         this.gpu = gpu;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     @Override

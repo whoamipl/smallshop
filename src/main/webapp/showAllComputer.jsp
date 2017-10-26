@@ -1,9 +1,9 @@
-<%@page import="com.example.servletjspdemo.domain.Person"%>
+<%@page import="com.example.servletjspdemo.domain.Computer"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <jsp:useBean id="storage" class="com.example.servletjspdemo.service.StorageService" scope="application" />
-<jsp:useBean id="computer" class="com.example.servletjspdemo.domain.Computer" scope="session" />
+<jsp:useBean id="computer" class="com.example.servletjspdemo.domain.Computer" scope="application"/>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -53,16 +53,21 @@
 	<div class="tabs"><a href='/smallshop/getComputerData.jsp'>Add Computer</div>
 	<div class="tabs"><a href='/smallshop/shop'>Shop</a></div>
 	<div/>
-    <form action="/shoppingcard">
 	  <%
+	      java.util.Map<Integer, com.example.servletjspdemo.domain.Computer> computers = storage.getShopDb();
+          for (java.util.Map.Entry<Integer, com.example.servletjspdemo.domain.Computer> entry : computers.entrySet()) {
+                            out.println("<form action=\"addtocart\" >\n" +
+                                    "<th>Model</th> <th>Price</th> <th>Dodaj do koszyka</th>\n" +
+                                    "<tr><td>"+entry.getValue().getModel()+"</td><td>"+entry.getValue().getPrice()+"</td>\n" +
+                                    "<td><input type=\"hidden\" name=\"model\" value=\""+entry.getValue().getModel()
+                                    +"\">\n" +
+                                    "<input type=\"hidden\" name=\"price\" value=\""+entry.getValue().getPrice()+"\">\n"
 
-	     java.util.Map<Integer, com.example.servletjspdemo.domain.Computer> computers = storage.getShopDb();
-         for(com.example.servletjspdemo.domain.Computer c : computers.values()) {
-          out.println("<label>" + c.getModel() + " " + c.getCpu() + " " + c.getGpu() + "<input " +
-                                 "type=\"checkbox\" value=\"\"/></label>");
-                     }
+                                    +
+                                    "<input type=\"submit\" value=\"Dodaj do koszyka\"></td></tr>\n" +
+                                    "</form>");
+                        }
       %>
-      <input type="submit" value="Add to card"/></input>
-     </form>
+
 </body>
 </html>
