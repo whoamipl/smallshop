@@ -1,12 +1,13 @@
-package com.example.servletjspdemo.web;
+package com.example.servletjspdemo.service;
+
 
 import java.util.HashMap;
 
-public class ShoppingCart {
+public class ShoppingCartService {
 
     HashMap<String, Double> cartItems;
 
-    public ShoppingCart(){
+    public ShoppingCartService(){
         cartItems = new HashMap<>();
 
     }

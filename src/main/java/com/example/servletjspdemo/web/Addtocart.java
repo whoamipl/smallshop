@@ -1,5 +1,7 @@
 package com.example.servletjspdemo.web;
 
+import com.example.servletjspdemo.service.ShoppingCartService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,38 +19,20 @@ public class Addtocart extends HttpServlet {
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws
             ServletException, IOException {
 
-        httpServletResponse.setCharacterEncoding("text/html;charset=UTF-8");
+        httpServletResponse.setCharacterEncoding("UTF-8");
         HttpSession session = httpServletRequest.getSession();
         PrintWriter out = httpServletResponse.getWriter();
-        ShoppingCart shoppingCart;
-        shoppingCart = (ShoppingCart) session.getAttribute("cart");
+        ShoppingCartService shoppingCart;
+        shoppingCart = (ShoppingCartService) session.getAttribute("cart");
 
         if (shoppingCart == null) {
-            shoppingCart = new ShoppingCart();
+            shoppingCart = new ShoppingCartService();
             session.setAttribute("cart", shoppingCart);
         }
 
           String model = httpServletRequest.getParameter("model");
           Double price = Double.parseDouble(httpServletRequest.getParameter("price"));
           shoppingCart.addToCart(model, price);
-
-          HashMap<String, Integer> items = shoppingCart.getCartItems();
-            for(String key: items.keySet())
-                    out.println("<tr><td>"+key+" - </td><td>"+"$"+items.get(key)+"</td></tr>");
-          out.println("<!DOCTYPE html>");
-          out.println("<html>");
-          out.println("<head>");
-          out.println("<title>result</title>");
-          out.println("</head>");
-          out.println("<body>");
-          out.println("<h1>Produkt został dodany do twojego koszyka</h1>");
-          out.println("<hr>");
-          out.println("<h2>Cart</h2>");
-          out.println("<table border='1px'>");
-
-          out.println("<table>");
-          out.println("</body>");
-          out.println("</html>");
-
+          httpServletResponse.sendRedirect("/smallshop/shoppingcart");
     }
 }

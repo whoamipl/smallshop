@@ -4,7 +4,46 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Product list</title>
+  <style type="text/css">
+    body {
+      background-color: #1c4150;
+      color: #e8ecee;
+    }
+    #topdiv{
+      margin-left: auto;
+      margin-right: auto;
+      position: absolute;
+    }
+    .tabs {
+      margin: 5px;
+      display: inline-block;
+      height: 50px;
+      width: 100px;
+      background-color: #32546c;
+      border: 2px solid #8da0ad;
+      float: left;
+      text-align: center;
+    }
+    a {
+
+      text-decoration: none;
+      color: #e8ecee;
+    }
+    a:visited {
+      color: #e8ecee;
+    }
+    form {
+      position: relative;
+      top:65px;
+    }
+    input {
+      background-color:#32546c;
+      border: 2px solid #8da0ad;
+      margin: 2px;
+      display: block;
+    }
+  </style>
 </head>
 <body>
 <jsp:useBean id="computer" class="com.example.servletjspdemo.domain.Computer" scope="session" />
@@ -18,11 +57,7 @@
   .getParameter("cpu"),
                 Integer.parseInt(request.getParameter("hdd")), request.getParameter("gpu"), Double.parseDouble
                 (request.getParameter("price")));
+  response.sendRedirect("/smallshop/showAllComputer.jsp");
 %>
-
-<p>Following computers has been added to storage: </p>
-<p>
-  <a href="showAllComputer.jsp">Show all persons</a>
-</p>
 </body>
 </html>

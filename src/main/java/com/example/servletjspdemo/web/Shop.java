@@ -1,6 +1,7 @@
 package com.example.servletjspdemo.web;
 
 import com.example.servletjspdemo.domain.Computer;
+import com.example.servletjspdemo.service.ShoppingCartService;
 import com.example.servletjspdemo.service.StorageService;
 
 import javax.servlet.ServletException;
@@ -32,8 +33,8 @@ public class Shop extends HttpServlet {
         HttpSession session = httpServletRequest.getSession();
 
 
-        ShoppingCart shoppingCart;
-        shoppingCart = (ShoppingCart) session.getAttribute("cart");
+        ShoppingCartService shoppingCart;
+        shoppingCart = (ShoppingCartService) session.getAttribute("cart");
         HashMap<String, Double> items = shoppingCart.getCartItems();
         for(String key: items.keySet()){
             out.println("<tr><td>"+key+" - </td><td>"+"$"+items.get(key)+"</td></tr>");
