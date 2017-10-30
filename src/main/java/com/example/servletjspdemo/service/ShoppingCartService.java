@@ -20,5 +20,8 @@ public class ShoppingCartService {
         cartItems.put(itemId, price);
     }
 
+    public void deleteFromCart(String itemId) {
 
+        cartItems.remove(itemId);
+    }
 }

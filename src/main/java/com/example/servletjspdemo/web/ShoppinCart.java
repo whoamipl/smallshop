@@ -30,15 +30,15 @@ public class ShoppinCart extends HttpServlet {
         out.println("<!DOCTYPE html>");
         out.println("<html>");
         out.println("<head>");
-        out.println("<title>result</title>");
+        out.println("<title>Koszyk</title>");
         out.println("</head>");
         out.println("<body>");
         out.println("<h1>Produkt został dodany do twojego koszyka</h1>");
         out.println("<hr>");
-        out.println("<h2>Cart</h2>");
+        out.println("<h2>Zawartość koszyka.</h2>");
         out.println("<table border='1px'>");
         for(String key: items.keySet())
-            out.println("<tr><td>"+key+" - </td><td>"+"$"+items.get(key)+"</td></tr>");
+            out.println("<form action='deletefromcart'><input type='hidden' name='name' value='"+key+"'><tr><td>"+key+" - </td><td>"+"$"+items.get(key)+"</td><td><input type='submit' value='delete'></td></tr></form>");
         out.println("<table>");
         out.println("</body>");
         out.println("</html>");
