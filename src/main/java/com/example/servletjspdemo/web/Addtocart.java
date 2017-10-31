@@ -1,7 +1,10 @@
 package com.example.servletjspdemo.web;
 
+import com.example.servletjspdemo.domain.Computer;
 import com.example.servletjspdemo.service.ShoppingCartService;
+import com.example.servletjspdemo.service.StorageService;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,24 +18,29 @@ import java.util.HashMap;
 @WebServlet("/addtocart")
 public class Addtocart extends HttpServlet {
 
+    private int counter = 1;
+
     @Override
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws
             ServletException, IOException {
 
         httpServletResponse.setCharacterEncoding("UTF-8");
         HttpSession session = httpServletRequest.getSession();
-        PrintWriter out = httpServletResponse.getWriter();
+
         ShoppingCartService shoppingCart;
         shoppingCart = (ShoppingCartService) session.getAttribute("cart");
-
+        ServletContext appContext = httpServletRequest.getServletContext();
+        StorageService shopDB = (StorageService) appContext.getAttribute("storage");
         if (shoppingCart == null) {
             shoppingCart = new ShoppingCartService();
             session.setAttribute("cart", shoppingCart);
         }
+          int id = Integer.parseInt(httpServletRequest.getParameter("id"));
 
-          String model = httpServletRequest.getParameter("model");
-          Double price = Double.parseDouble(httpServletRequest.getParameter("price"));
-          shoppingCart.addToCart(model, price);
-          httpServletResponse.sendRedirect("/smallshop/shoppingcart");
+          Computer computer = shopDB.findComputerById(id);
+          computer.decreaseAmount();
+          shoppingCart.addToCart(counter, computer);
+          ++counter;
+          httpServletResponse.sendRedirect("/smallshop/showAllComputer.jsp");
     }
 }

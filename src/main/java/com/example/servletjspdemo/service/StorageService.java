@@ -13,23 +13,28 @@ public class StorageService {
 	private String gpu;
 	private int id = 0;
 	private double price;
-	Map<Integer, Computer> shopDB = new HashMap<Integer, Computer>();
+	private Map<Integer, Computer> shopDB = new HashMap<>();
 	public Map<Integer, Computer> getShopDb() {
 		return shopDB;
 	}
 
-	public void setShopDB(Map<Integer, Computer> shopDb) {
-		this.shopDB = shopDB;
-	}
-
-	public void addComputer (String model, int ram, String cpu, int hdd, String gpu, double price) {
+	public void addComputer (String model, int ram, String cpu, int hdd, String gpu, double price, int amount) {
 		++id;
-		this.shopDB.put(id,new Computer(model, ram, cpu, hdd, gpu, price));
+		this.shopDB.put(id,new Computer(model, ram, cpu, hdd, gpu, price, amount));
 	}
 
 	public Computer findComputerById(int id) {
 		for (Map.Entry<Integer, Computer> entry : shopDB.entrySet()){
 			if (entry.getKey() == id) {
+				return entry.getValue();
+			}
+		}
+		return null;
+	}
+
+	public Computer findComputerByModel(String model) {
+		for (Map.Entry<Integer, Computer> entry : shopDB.entrySet()){
+			if (entry.getValue().getModel() == model) {
 				return entry.getValue();
 			}
 		}

@@ -23,7 +23,7 @@ public class DeleteFromCart extends HttpServlet {
         httpServletResponse.setContentType("text/html");
         HttpSession session = httpServletRequest.getSession();
         ShoppingCartService shoppingCart = (ShoppingCartService) session.getAttribute("cart");
-        shoppingCart.deleteFromCart(httpServletRequest.getParameter("name"));
+        shoppingCart.deleteFromCart(Integer.parseInt(httpServletRequest.getParameter("name")));
         httpServletResponse.sendRedirect("/smallshop/shoppingcart");
     }
 

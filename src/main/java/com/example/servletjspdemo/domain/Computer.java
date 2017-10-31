@@ -8,18 +8,29 @@ public class Computer {
     private int hdd;
     private String gpu;
     private double price;
+    private int amout;
 
     public Computer () {
 
     }
 
-    public Computer(String model, int ram, String cpu, int hdd, String gpu, double price) {
+    public int getAmout() {
+        return amout;
+    }
+
+    public void setAmout(int amout) {
+        this.amout = amout;
+    }
+
+    public Computer(String model, int ram, String cpu, int hdd, String gpu, double price, int amout) {
         this.model = model;
         this.ram = ram;
         this.cpu = cpu;
         this.hdd = hdd;
         this.gpu = gpu;
         this.price = price;
+        this.amout = amout;
+
     }
 
     public String getModel() {
@@ -70,6 +81,15 @@ public class Computer {
         this.price = price;
     }
 
+    public void incrementAmount() {
+        this.amout++;
+    }
+    public int getAmount() {
+        return amout;
+    }
+    public void decreaseAmount() {
+        amout--;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

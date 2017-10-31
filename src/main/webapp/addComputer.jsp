@@ -1,63 +1,32 @@
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.Collections" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
+<jsp:useBean id="storage" class="com.example.servletjspdemo.service.StorageService" scope="application"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Product list</title>
-  <style type="text/css">
-    body {
-      background-color: #1c4150;
-      color: #e8ecee;
-    }
-    #topdiv{
-      margin-left: auto;
-      margin-right: auto;
-      position: absolute;
-    }
-    .tabs {
-      margin: 5px;
-      display: inline-block;
-      height: 50px;
-      width: 100px;
-      background-color: #32546c;
-      border: 2px solid #8da0ad;
-      float: left;
-      text-align: center;
-    }
-    a {
-
-      text-decoration: none;
-      color: #e8ecee;
-    }
-    a:visited {
-      color: #e8ecee;
-    }
-    form {
-      position: relative;
-      top:65px;
-    }
-    input {
-      background-color:#32546c;
-      border: 2px solid #8da0ad;
-      margin: 2px;
-      display: block;
-    }
-  </style>
 </head>
 <body>
-<jsp:useBean id="computer" class="com.example.servletjspdemo.domain.Computer" scope="session" />
-
-<jsp:setProperty name="computer" property="*" />
-
-<jsp:useBean id="storage" class="com.example.servletjspdemo.service.StorageService" scope="application" />
-
+<div>
+    <div class="tabs" style="display: inline-block; border: solid 1px #000; text-decoration: none;"><a href='/smallshop/shoppingcart'>Shopping Card</a></div>
+    <div class="tabs" style="display: inline-block; border: solid 1px #000; text-decoration: none;"><a href='/smallshop/getComputerData.jsp'>Add Computer</a></div>
+    <div class="tabs" style="display: inline-block; border: solid 1px #000; text-decoration: none;"><a href='/smallshop/showAllComputer.jsp'>Shop</a></div>
+    <div/>
 <%
-  storage.addComputer(request.getParameter("model"), Integer.parseInt(request.getParameter("ram")),request
-  .getParameter("cpu"),
+    com.example.servletjspdemo.domain.Computer c = storage.findComputerByModel(request.getParameter("model"));
+    if ( c == null) {
+        storage.addComputer(request.getParameter("model"), Integer.parseInt(request.getParameter("ram")), request
+                        .getParameter("cpu"),
                 Integer.parseInt(request.getParameter("hdd")), request.getParameter("gpu"), Double.parseDouble
-                (request.getParameter("price")));
-  response.sendRedirect("/smallshop/showAllComputer.jsp");
+                        (request.getParameter("price")),1);
+        response.sendRedirect("/smallshop/showAllComputer.jsp");
+    } else {
+        c.incrementAmount();
+        response.sendRedirect("/smallshop/showAllComputer.jsp");
+    }
 %>
 </body>
 </html>
