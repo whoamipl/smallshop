@@ -34,7 +34,7 @@ public class StorageService {
 
 	public Computer findComputerByModel(String model) {
 		for (Map.Entry<Integer, Computer> entry : shopDB.entrySet()){
-			if (entry.getValue().getModel() == model) {
+			if (entry.getValue().getModel().equals(model)) {
 				return entry.getValue();
 			}
 		}

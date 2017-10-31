@@ -18,6 +18,8 @@ public class Buy extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
 
+        httpServletResponse.setCharacterEncoding("UTF-8");
+        httpServletResponse.setContentType("text/html");
         HttpSession session = httpServletRequest.getSession();
         ShoppingCartService cart = (ShoppingCartService) session.getAttribute("cart");
         cart.deleteAll();

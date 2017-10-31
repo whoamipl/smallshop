@@ -1,6 +1,8 @@
 package com.example.servletjspdemo.web;
 
+import com.example.servletjspdemo.domain.Computer;
 import com.example.servletjspdemo.service.ShoppingCartService;
+import com.example.servletjspdemo.service.StorageService;
 
 import javax.jws.WebService;
 import javax.servlet.ServletException;
@@ -22,8 +24,9 @@ public class DeleteFromCart extends HttpServlet {
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletResponse.setContentType("text/html");
         HttpSession session = httpServletRequest.getSession();
+        int id = Integer.parseInt(httpServletRequest.getParameter("name"));
         ShoppingCartService shoppingCart = (ShoppingCartService) session.getAttribute("cart");
-        shoppingCart.deleteFromCart(Integer.parseInt(httpServletRequest.getParameter("name")));
+        shoppingCart.deleteFromCart(id);
         httpServletResponse.sendRedirect("/smallshop/shoppingcart");
     }
 
