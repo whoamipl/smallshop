@@ -66,69 +66,27 @@ public final class showAllComputer_jsp extends org.apache.jasper.runtime.HttpJsp
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("        <style type=\"text/css\">\n");
-      out.write("            body {\n");
-      out.write("                background-color: #1c4150;\n");
-      out.write("                color: #e8ecee;\n");
-      out.write("            }\n");
-      out.write("            #topdiv{\n");
-      out.write("                margin-left: auto;\n");
-      out.write("                margin-right: auto;\n");
-      out.write("                position: absolute;\n");
-      out.write("            }\n");
-      out.write("            .tabs {\n");
-      out.write("                margin: 5px;\n");
-      out.write("                display: inline-block;\n");
-      out.write("                height: 50px;\n");
-      out.write("                width: 100px;\n");
-      out.write("                background-color: #32546c;\n");
-      out.write("                border: 2px solid #8da0ad;\n");
-      out.write("                float: left;\n");
-      out.write("                text-align: center;\n");
-      out.write("                }\n");
-      out.write("            a {\n");
-      out.write("\n");
-      out.write("                text-decoration: none;\n");
-      out.write("                color: #e8ecee;\n");
-      out.write("            }\n");
-      out.write("            a:visited {\n");
-      out.write("                color: #e8ecee;\n");
-      out.write("            }\n");
-      out.write("            form {\n");
-      out.write("                position: relative;\n");
-      out.write("                top:65px;\n");
-      out.write("            }\n");
-      out.write("            input {\n");
-      out.write("              background-color:#32546c;\n");
-      out.write("              border: 2px solid #8da0ad;\n");
-      out.write("              margin: 2px;\n");
-      out.write("              display: block;\n");
-      out.write("            }\n");
-      out.write("    </style>\n");
       out.write("</head>\n");
       out.write("<body>\n");
-      out.write("\t<div id=\"topdiv\">\n");
-      out.write("\t<div class=\"tabs\"><a href='/smallshop/shoppingcard'>Shopping Card</div>\n");
-      out.write("\t<div class=\"tabs\"><a href='/smallshop/getComputerData.jsp'>Add Computer</div>\n");
-      out.write("\t<div class=\"tabs\"><a href='/smallshop/shop'>Shop</a></div>\n");
+      out.write("\t<div>\n");
+      out.write("\t\t<div class=\"tabs\" style=\"display: inline-block; border: solid 1px #000; text-decoration: none;\"><a href='/smallshop/shoppingcart'>Shopping Card</a></div>\n");
+      out.write("\t\t<div class=\"tabs\" style=\"display: inline-block; border: solid 1px #000; text-decoration: none;\"><a href='/smallshop/getComputerData.jsp'>Add Computer</a></div>\n");
+      out.write("\t<div class=\"tabs\" style=\"display: inline-block; border: solid 1px #000; text-decoration: none;\"><a href='/smallshop/showAllComputers.jsp'>Shop</a></div>\n");
       out.write("\t<div/>\n");
       out.write("\t  ");
 
 	      java.util.Map<Integer, com.example.servletjspdemo.domain.Computer> computers = storage.getShopDb();
           for (java.util.Map.Entry<Integer, com.example.servletjspdemo.domain.Computer> entry : computers.entrySet()) {
-                            out.println("<form action=\"addtocart\" >\n" +
-                                    "<th>Model</th> <th>Price</th> <th>Dodaj do koszyka</th>\n" +
-                                    "<tr><td>"+entry.getValue().getModel()+"</td><td>"+entry.getValue().getPrice()+"</td>\n" +
-                                    "<td><input type=\"hidden\" name=\"model\" value=\""+entry.getValue().getModel()
-                                    +"\">\n" +
-                                    "<input type=\"hidden\" name=\"price\" value=\""+entry.getValue().getPrice()+"\">\n"
+			  out.println("<form action=\"addtocart\">\n" +
+			  " \t<p>Model:&nbsp;"+entry.getValue().getModel()+"&nbsp;Cena:&nbsp;"+entry.getValue().getPrice()+"Ilość w magazynie:&nbsp;"+entry.getValue().getAmout()+
+			  "  <input type=\"hidden\" name=\"id\" value=\""+entry.getKey()+"\"/>" +
+			  "  <input type=\"hidden\" name=\"price\" value=\""+entry.getValue().getPrice()+"\"/>" +
+			  "  <input type=\"submit\" value=\"Dodaj do koszyka\">\"\n" +
+			  "</form>");
+			  }
+           out.println("<hr>");
 
-                                    +
-                                    "<input type=\"submit\" value=\"Dodaj do koszyka\"></td></tr>\n" +
-                                    "</form>");
-                        }
       
-      out.write("\n");
       out.write("\n");
       out.write("</body>\n");
       out.write("</html>\n");

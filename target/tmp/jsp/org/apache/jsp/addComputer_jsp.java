@@ -3,6 +3,8 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.util.Map;
+import java.util.Collections;
 
 public final class addComputer_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -42,26 +44,21 @@ public final class addComputer_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n");
       out.write("<html>\n");
       out.write("<head>\n");
       out.write("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("<title>Insert title here</title>\n");
+      out.write("<title>Product list</title>\n");
       out.write("</head>\n");
       out.write("<body>\n");
-      com.example.servletjspdemo.domain.Computer computer = null;
-      synchronized (session) {
-        computer = (com.example.servletjspdemo.domain.Computer) _jspx_page_context.getAttribute("computer", PageContext.SESSION_SCOPE);
-        if (computer == null){
-          computer = new com.example.servletjspdemo.domain.Computer();
-          _jspx_page_context.setAttribute("computer", computer, PageContext.SESSION_SCOPE);
-        }
-      }
-      out.write('\n');
-      out.write('\n');
-      org.apache.jasper.runtime.JspRuntimeLibrary.introspect(_jspx_page_context.findAttribute("computer"), request);
-      out.write('\n');
-      out.write('\n');
+      out.write("<div>\n");
+      out.write("    <div class=\"tabs\" style=\"display: inline-block; border: solid 1px #000; text-decoration: none;\"><a href='/smallshop/shoppingcart'>Shopping Card</a></div>\n");
+      out.write("    <div class=\"tabs\" style=\"display: inline-block; border: solid 1px #000; text-decoration: none;\"><a href='/smallshop/getComputerData.jsp'>Add Computer</a></div>\n");
+      out.write("    <div class=\"tabs\" style=\"display: inline-block; border: solid 1px #000; text-decoration: none;\"><a href='/smallshop/showAllComputer.jsp'>Shop</a></div>\n");
+      out.write("    <div/>\n");
+      out.write("\n");
       com.example.servletjspdemo.service.StorageService storage = null;
       synchronized (application) {
         storage = (com.example.servletjspdemo.service.StorageService) _jspx_page_context.getAttribute("storage", PageContext.APPLICATION_SCOPE);
@@ -73,17 +70,19 @@ public final class addComputer_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write('\n');
       out.write('\n');
 
-  storage.addComputer(request.getParameter("model"), Integer.parseInt(request.getParameter("ram")),request
-  .getParameter("cpu"),
+    com.example.servletjspdemo.domain.Computer c = storage.findComputerByModel(request.getParameter("model"));
+    if ( c == null) {
+        storage.addComputer(request.getParameter("model"), Integer.parseInt(request.getParameter("ram")), request
+                        .getParameter("cpu"),
                 Integer.parseInt(request.getParameter("hdd")), request.getParameter("gpu"), Double.parseDouble
-                (request.getParameter("price")));
+                        (request.getParameter("price")),1);
+        response.sendRedirect("/smallshop/showAllComputer.jsp");
+    } else {
+        c.incrementAmount();
+        response.sendRedirect("/smallshop/showAllComputer.jsp");
+    }
 
       out.write("\n");
-      out.write("\n");
-      out.write("<p>Following computers has been added to storage: </p>\n");
-      out.write("<p>\n");
-      out.write("  <a href=\"showAllComputer.jsp\">Show all persons</a>\n");
-      out.write("</p>\n");
       out.write("</body>\n");
       out.write("</html>");
     } catch (Throwable t) {
