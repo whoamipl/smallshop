@@ -53,15 +53,6 @@ public final class showAllComputer_jsp extends org.apache.jasper.runtime.HttpJsp
           _jspx_page_context.setAttribute("storage", storage, PageContext.APPLICATION_SCOPE);
         }
       }
-      out.write('\n');
-      com.example.servletjspdemo.domain.Computer computer = null;
-      synchronized (application) {
-        computer = (com.example.servletjspdemo.domain.Computer) _jspx_page_context.getAttribute("computer", PageContext.APPLICATION_SCOPE);
-        if (computer == null){
-          computer = new com.example.servletjspdemo.domain.Computer();
-          _jspx_page_context.setAttribute("computer", computer, PageContext.APPLICATION_SCOPE);
-        }
-      }
       out.write("\n");
       out.write("<html>\n");
       out.write("    <head>\n");

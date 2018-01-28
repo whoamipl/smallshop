@@ -46,6 +46,15 @@ public final class addComputer_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      com.example.servletjspdemo.service.StorageService storage = null;
+      synchronized (application) {
+        storage = (com.example.servletjspdemo.service.StorageService) _jspx_page_context.getAttribute("storage", PageContext.APPLICATION_SCOPE);
+        if (storage == null){
+          storage = new com.example.servletjspdemo.service.StorageService();
+          _jspx_page_context.setAttribute("storage", storage, PageContext.APPLICATION_SCOPE);
+        }
+      }
+      out.write("\n");
       out.write("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n");
       out.write("<html>\n");
       out.write("<head>\n");
@@ -58,17 +67,6 @@ public final class addComputer_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <div class=\"tabs\" style=\"display: inline-block; border: solid 1px #000; text-decoration: none;\"><a href='/smallshop/getComputerData.jsp'>Add Computer</a></div>\n");
       out.write("    <div class=\"tabs\" style=\"display: inline-block; border: solid 1px #000; text-decoration: none;\"><a href='/smallshop/showAllComputer.jsp'>Shop</a></div>\n");
       out.write("    <div/>\n");
-      out.write("\n");
-      com.example.servletjspdemo.service.StorageService storage = null;
-      synchronized (application) {
-        storage = (com.example.servletjspdemo.service.StorageService) _jspx_page_context.getAttribute("storage", PageContext.APPLICATION_SCOPE);
-        if (storage == null){
-          storage = new com.example.servletjspdemo.service.StorageService();
-          _jspx_page_context.setAttribute("storage", storage, PageContext.APPLICATION_SCOPE);
-        }
-      }
-      out.write('\n');
-      out.write('\n');
 
     com.example.servletjspdemo.domain.Computer c = storage.findComputerByModel(request.getParameter("model"));
     if ( c == null) {

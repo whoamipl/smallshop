@@ -43,26 +43,15 @@ public final class getComputerData_jsp extends org.apache.jasper.runtime.HttpJsp
 
       out.write("\n");
       out.write("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n");
-      out.write("\n");
-      out.write("\n");
       out.write("<title>Add product</title>\n");
-      com.example.servletjspdemo.service.StorageService storage = null;
-      synchronized (application) {
-        storage = (com.example.servletjspdemo.service.StorageService) _jspx_page_context.getAttribute("storage", PageContext.APPLICATION_SCOPE);
-        if (storage == null){
-          storage = new com.example.servletjspdemo.service.StorageService();
-          _jspx_page_context.setAttribute("storage", storage, PageContext.APPLICATION_SCOPE);
-        }
-      }
-      out.write("\n");
       out.write("<html>\n");
       out.write("<head>\n");
       out.write("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
       out.write("</head>\n");
       out.write("<body>\n");
       out.write("\t<div id=\"topdiv\">\n");
-      out.write("\t<div class=\"tabs\"><a href='/smallshop/shoppingcard'>Shopping Card</div>\n");
-      out.write("\t<div class=\"tabs\"><a href='/smallshop/getComputerData.jsp'>Add Computer</div>\n");
+      out.write("        <div class=\"tabs\"><a href='/smallshop/shoppingcard'>Shopping Card</a></div>\n");
+      out.write("        <div class=\"tabs\"><a href='/smallshop/getComputerData.jsp'>Add Computer</a></div>\n");
       out.write("\t<div class=\"tabs\"><a href='/smallshop/showAllComputer.jsp'>Shop</a></div>\n");
       out.write("\t<div/>\n");
       out.write("\t<form action=\"addComputer.jsp\">\n");
